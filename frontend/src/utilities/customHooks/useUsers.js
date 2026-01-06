@@ -1,5 +1,4 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient } from "../constants/queryClient";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   getAllUsers,
   getCurrentUser,
@@ -26,14 +25,16 @@ export const useCurrentUser = () =>
 // Hooks for editing user data require useMutations not useQuery
 
 // Create tanstack mutation custom hook to update current logged in user
-export const useUpdateCurrentUser = () =>
-  useMutation({
+export const useUpdateCurrentUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
     mutationFn: updateCurrentUser,
     // Invalidate and refetch current user after updating current user
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
     },
   });
+};
 
 // Create tanstack mutation custom hook to change current logged in user password
 export const useUpdateCurrentUserPassword = () =>
@@ -43,10 +44,12 @@ export const useUpdateCurrentUserPassword = () =>
   });
 
 // Create tanstack mutation custom hook to delete current logged in user
-export const useDeleteCurrentUser = () =>
-  useMutation({
+export const useDeleteCurrentUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
     mutationFn: deleteCurrentUser,
     onSuccess: () => {
       queryClient.clear(); // Clear all cache on user deletion
     },
   });
+};

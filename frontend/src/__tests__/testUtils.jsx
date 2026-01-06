@@ -2,6 +2,7 @@
 
 /* Test utility file that sets up custom render function with global providers and creates mock
 vitest object that replaces real api calls from apiServices with vitest spies*/
+import React from "react";
 import { render } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
@@ -57,7 +58,9 @@ function createTestQueryClient() {
 
 // Wraps all children components (the ones being tested) with all providers/context we use in main
 export function GlobalProviders({ children }) {
-  const testQueryClient = createTestQueryClient();
+  // Use a stable query client reference for the entire lifespan of this component wrapper
+  const [testQueryClient] = React.useState(() => createTestQueryClient());
+
   return (
     <QueryClientProvider client={testQueryClient}>
       <AuthProvider>

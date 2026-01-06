@@ -1,7 +1,11 @@
 /* eslint-disable no-console */
 export const validateEnv = () => {
   // CRITICAL application env variables, the app will not run without these
-  const required = ['JWT_SECRET_KEY', 'TOKEN_HEADER_KEY', 'DATABASE_URI'];
+  const required = ['JWT_SECRET_KEY', 'TOKEN_HEADER_KEY'];
+  // DATABASE_URI is not required for tests since they use mongodb-memory-server
+  if (process.env.NODE_ENV !== 'test') {
+    required.push('DATABASE_URI');
+  }
   const missing = required.filter((env) => !process.env[env]);
 
   // IF anything required is in the missing array, alert and stop the server running

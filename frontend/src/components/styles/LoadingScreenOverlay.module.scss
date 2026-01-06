@@ -1,0 +1,35 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: color(overlay-dark);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.filmContainer {
+    @include flex-center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.filmReel {
+    font-size: 4rem;
+    filter: drop-shadow(0 0 10px color(accent-gold))
+}
+
+.loadingText {
+    color: color(text-light);
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px color(accent-gold);
+}

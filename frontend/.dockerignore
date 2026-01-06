@@ -1,0 +1,25 @@
+# Exclude node modules - They are created fresh in build
+**/node_modules/
+
+# Exclude IDE files
+.vscode/
+
+# Exclude log files
+*.log
+*.log.*
+
+# Exclude env files and examples
+.env
+.env.*
+
+# Exclude git files
+.git
+.gitignore
+
+# Exclude build folders
+dist/
+build/
+
+# Exclude docs
+docs/
+**/*.md

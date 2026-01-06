@@ -1,0 +1,124 @@
+.leaderboard {
+  grid-row: 2;
+  padding: 2rem 1rem;
+  max-height: 100%;
+  background: #100b16;
+  overflow: hidden;
+}
+
+.errorWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.title h1 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #C0C0C0;
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
+
+.featureContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.rankings {
+  color: #273346;
+  background: #2D1B3A;
+  border-radius: 5px;
+  box-shadow: 0px 0.4rem 0.5rem 0.5rem rgba(212, 160, 23, 0.637);
+  padding: 0.5rem;
+  flex-basis: 35%;
+  min-width: 500px;
+  height: 565px;
+  overflow: scroll;
+}
+.rankings h2 {
+  text-align: center;
+  color: #C0C0C0;
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
+.rankings .tableWrapper {
+  border: 1px solid #D4A017;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.rankings table {
+  border-collapse: collapse;
+  width: 100%;
+  background: rgba(4, 21, 68, 0.45);
+}
+.rankings th,
+.rankings td {
+  padding: 0.5rem;
+}
+.rankings td:first-child {
+  text-align: center;
+  font-weight: 400;
+}
+.rankings td:nth-child(3) {
+  text-align: right;
+}
+.rankings th {
+  background-color: #dcc7f0;
+}
+.rankings tbody tr:nth-child(even) {
+  background-color: #e8d7f8;
+}
+.rankings tbody tr:nth-child(odd) {
+  background-color: rgba(232, 215, 248, 0.7725490196);
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .leaderboard {
+    height: auto;
+    margin-top: 7.5dvh;
+    overflow: visible;
+  }
+  .featureContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .featureContainer .podium {
+    order: -1;
+  }
+  .featureContainer .rankings {
+    margin-top: 8%;
+    width: 500px;
+  }
+}
+@media (max-width: 768px) {
+  .leaderboard {
+    height: auto;
+    margin-top: 7.5dvh;
+    overflow: visible;
+    padding: 8%;
+  }
+  .featureContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  .featureContainer .podium {
+    order: -1;
+  }
+  .featureContainer .rankings {
+    min-width: auto;
+    margin-top: 8%;
+  }
+  .featureContainer .rankings h2 {
+    font-size: 1.5rem;
+  }
+}/*# sourceMappingURL=Leaderboard.module.css.map */

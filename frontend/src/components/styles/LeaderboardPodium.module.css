@@ -1,0 +1,71 @@
+.podiumSection {
+  background: rgba(4, 21, 68, 0.7);
+  box-shadow: 0px 0.4rem 0.5rem 0.5rem rgba(192, 192, 192, 0.637);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  border: 5px solid rgba(26, 20, 35, 0.85);
+  border-style: inset;
+  border-radius: 5px;
+}
+
+.podiumTitle {
+  color: #C0C0C0;
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
+
+.podiumContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+}
+.podiumContainer .podiumPlace {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0.5rem;
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+  background-color: #2D1B3A;
+}
+.podiumContainer .podiumPlace figcaption {
+  margin: 0.25rem;
+  color: #E8E3E3;
+  font-weight: 600;
+}
+.podiumContainer .podiumPlace img {
+  margin-top: 0.5rem;
+  max-width: 125px;
+}
+.podiumContainer .first {
+  order: 3;
+  border: 5px solid #E8C547;
+}
+.podiumContainer .second {
+  order: 2;
+  border: 5px solid #C0C0C0;
+}
+.podiumContainer .third {
+  order: 1;
+  border: 5px solid Peru;
+}
+
+.first {
+  width: 150px;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+}/*# sourceMappingURL=LeaderboardPodium.module.css.map */

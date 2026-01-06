@@ -1,0 +1,154 @@
+/* Wrapper for burger menu component */
+@media (min-width: 1024px) {
+  .burger-menu-wrapper {
+    display: none !important;
+  }
+}
+
+.bm-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  touch-action: none;
+  background: rgba(0, 0, 0, 0.3);
+  height: 100% !important;
+  z-index: 999 !important;
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  left: 15px;
+  top: 15px;
+  z-index: 1000;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #D4A017;
+  box-shadow: 0 2px 4px #4A1F63;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #4A1F63;
+  box-shadow: 0 2px 4px #D4A017;
+  opacity: 1 !important;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 30px !important;
+  width: 30px !important;
+  right: -15px !important;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #E8E3E3;
+  height: 20px !important;
+  width: 5px !important;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+  max-width: 15em;
+  z-index: 1000;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #2D1B3A;
+  padding: 2.5em 0.7em 0;
+  font-size: 1.15em;
+  width: 110%;
+  touch-action: none;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #2D1B3A;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0em;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Individual item */
+.bm-item {
+  color: #E8E3E3;
+  font-size: 1.5rem;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  border-bottom: 1px solid #D4A017;
+  transition: all 0.3s ease 0s !important;
+  white-space: nowrap;
+}
+
+.bm-item:hover {
+  color: #4A1F63;
+  background-color: #D4A017;
+  transform: scale(1.1) !important;
+}
+
+.bm-item.active {
+  color: #100b16;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  background-color: #8B1A3D;
+}
+
+/* Logo at bottom of menu */
+.bm-menu img {
+  margin-top: auto;
+  align-self: center;
+  padding: 20px;
+  border-bottom: none;
+  border-radius: 50%;
+  max-width: 100%;
+  pointer-events: none;
+}
+
+.bm-menu img:hover {
+  background: none;
+}
+
+/* FontAwesome icons in menu items */
+.bm-item svg {
+  margin-right: 8px;
+}
+
+.bm-menu p {
+  color: #E8E3E3;
+  font-size: 0.9rem;
+  text-align: center;
+  white-space: normal;
+  border: none;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+  .bm-overlay,
+  .bm-burger-button,
+  .bm-menu-wrap {
+    display: none !important;
+  }
+}/*# sourceMappingURL=BurgerMenu.css.map */

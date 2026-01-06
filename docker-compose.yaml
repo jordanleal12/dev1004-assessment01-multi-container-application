@@ -1,0 +1,61 @@
+services:
+  # Backend Service
+  backend:
+    build: ./backend
+    container_name: backend_container
+    command: npm run dev
+    # Map container port 5000 to host port 5000 for local dev debugging only
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - LOCAL_DB_URI=mongodb://mongo_db:27017/movie_db
+      - OMDB_API_KEY=${OMDB_API_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - TOKEN_HEADER_KEY=authorization
+    depends_on:
+      - mongo_db
+    volumes:
+      # Add application working directory as bind mount to enable hot reloading
+      - ./backend:/app
+      # Create anonymous volume for node_modules to ensure container uses its own installed packages
+      - /app/node_modules
+    networks:
+      - mern-network
+
+  # Frontend Service
+  frontend:
+    build: ./frontend
+    container_name: frontend_container
+    ports:
+      # Map container port for dev and prod as it is needed to access application
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    volumes:
+      # Add application working directory as bind mount to enable hot reloading
+      - ./frontend:/app
+      # Create anonymous volume for node_modules to ensure container uses its own installed packages
+      - /app/node_modules
+    networks:
+      - mern-network
+
+  # MongoDB Service
+  mongo_db:
+    image: mongo:8.2
+    container_name: mongo_container
+    ports:
+      - "27017:27017" # Exposed for local debugging tools (like Compass)
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mern-network
+
+# Define the network
+networks:
+  mern-network:
+    driver: bridge
+
+# Define the volume for persistent database storage
+volumes:
+  mongo-data:

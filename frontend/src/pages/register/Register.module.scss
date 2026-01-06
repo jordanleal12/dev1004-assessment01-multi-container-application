@@ -1,0 +1,120 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.registerContainer {
+  @include flex-center;
+  margin: 0;
+  text-align: left;
+}
+
+.registerForm {
+  background: color(theme-white);
+  padding: spacing(xxl);
+  border-radius: radius(lg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: auto;
+
+  h1 {
+    text-align: center;
+    margin-bottom: spacing(xl);
+    color: color(text-dark);
+  }
+
+  button {
+    display: block;
+  }
+}
+
+.inputGroup {
+  margin-bottom: spacing(lg);
+
+  legend {
+    font-weight: 600;
+    margin-bottom: spacing(md);
+    color: color(text-dark);
+  }
+
+  .inputField {
+    margin-bottom: spacing(md);
+  }
+
+  label {
+    display: block;
+    margin-bottom: spacing(sm);
+    font-weight: 600;
+    color: color(text-dark);
+  }
+
+  small {
+    color: color(text-dark);
+  }
+}
+
+// Unique to Login component
+.registerInput {
+  width: 90%;
+  padding: spacing(md);
+  border: 2px solid #e2e8f0;
+  border-radius: radius(md);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: color(primary);
+  }
+
+  &.inputError {
+    border-color: color(error);
+  }
+}
+
+.errorMessage {
+  color: color(error);
+  font-size: 0.875rem;
+  margin-top: spacing(xs);
+  display: block;
+}
+
+.apiError {
+  background: #fed7d7;
+  color: color(error);
+  padding: spacing(xs);
+  border-radius: radius(md);
+  margin-bottom: spacing(xl);
+  text-align: center;
+}
+
+// Unique to Login component
+.registerButton {
+  @include button-reset;
+  width: 30%;
+  margin: 0 auto;
+  padding: spacing(md);
+  background: color(primary);
+  color: color(white);
+  border-radius: radius(md);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.4s ease;
+
+  &:hover:not(:disabled) {
+    background: color(primary-dark);
+  }
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+}
+
+// Responsive
+@include mobile {
+  .registerContainer {
+    padding: spacing(md);
+  }
+
+  .registerForm {
+    padding: spacing(xl);
+  }
+}

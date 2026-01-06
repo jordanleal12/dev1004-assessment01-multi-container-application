@@ -1,0 +1,111 @@
+.registerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  text-align: left;
+}
+
+.registerForm {
+  background: #b5a6be;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: auto;
+}
+.registerForm h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #273346;
+}
+.registerForm button {
+  display: block;
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+}
+.inputGroup legend {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #273346;
+}
+.inputGroup .inputField {
+  margin-bottom: 1rem;
+}
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #273346;
+}
+.inputGroup small {
+  color: #273346;
+}
+
+.registerInput {
+  width: 90%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+.registerInput:focus {
+  outline: none;
+  border-color: #5D2A7A;
+}
+.registerInput.inputError {
+  border-color: #A63232;
+}
+
+.errorMessage {
+  color: #A63232;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.apiError {
+  background: #fed7d7;
+  color: #A63232;
+  padding: 0.25rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.registerButton {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  width: 30%;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #5D2A7A;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.4s ease;
+}
+.registerButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.registerButton:hover:not(:disabled) {
+  background: #4A1F63;
+}
+.registerButton.buttonLoading {
+  background: #a0aec0;
+}
+
+@media (max-width: 768px) {
+  .registerContainer {
+    padding: 1rem;
+  }
+  .registerForm {
+    padding: 2rem;
+  }
+}/*# sourceMappingURL=Register.module.css.map */

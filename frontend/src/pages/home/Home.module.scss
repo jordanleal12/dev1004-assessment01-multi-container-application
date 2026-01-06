@@ -1,0 +1,82 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.home {
+  grid-row: 2;
+  padding: spacing(xl) spacing(md);
+  background: color(background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: color(text-dark);
+  // height: 100% !important;
+
+  .podiumSection {
+    height: 575px;
+  }
+
+  @media (max-width: breakpoint(tablet)) {
+    padding-top: spacing(xxl);
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    font-weight: 700;
+    color: color(base-silver);
+    text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: color(base-silver);
+    text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+  }
+
+  p {
+    max-width: 100rem;
+    line-height: 1;
+    // margin: spacing(lg) 0;
+    color: color(text-light);
+    font-size: 1.1rem;
+    // padding: 0 spacing(sm);
+  }
+
+  .homeFeatures {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: space-between;
+    justify-content: space-evenly;
+    // gap: 15px;
+    padding-top: 25px;
+  }
+}
+
+@include tablet {
+  .home {
+    margin-top: 7dvh;
+  }
+
+  .homeFeatures {
+    gap: 4dvh;
+    padding-bottom: 2dvh;
+  }
+}
+
+@include mobile {
+  .home {
+    margin-top: 7.5dvh;
+    max-width: 100dvw;
+  }
+
+  .homeFeatures {
+    max-width: 90dvw;
+    gap: 4dvh;
+    padding-bottom: 2dvh;
+  }
+}

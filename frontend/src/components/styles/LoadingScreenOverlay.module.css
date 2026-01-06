@@ -1,0 +1,35 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(26, 20, 35, 0.85);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.filmContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.filmReel {
+  font-size: 4rem;
+  filter: drop-shadow(0 0 10px #E8C547);
+}
+
+.loadingText {
+  color: #E8E3E3;
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px #E8C547;
+}/*# sourceMappingURL=LoadingScreenOverlay.module.css.map */

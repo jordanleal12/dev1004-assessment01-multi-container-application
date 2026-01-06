@@ -1,0 +1,321 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.card {
+  position: relative;
+  border-radius: radius(lg);
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  background: transparent;
+  min-height: 200px;
+  z-index: 1;
+}
+
+// PASTEL BACKGROUND - Always at the bottom
+.pastelBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: radius(lg);
+}
+
+.poster {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  border-radius: radius(lg);
+  z-index: 2;
+}
+
+.posterOverlay {
+  position: absolute;
+  inset: 0;
+  background: color(overlay-dark);
+  z-index: 3;
+}
+
+.content {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  align-items: start;
+  position: relative;
+  text-align: center;
+  z-index: 4; // Above everything
+  padding: spacing(md);
+  color: color(card-grey);
+  text-shadow: 0 1px 3px color(theme-white);
+  min-height: 200px;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: color(overlay-medium);
+  backdrop-filter: blur(4px);
+  color: color(theme-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: spacing(md);
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+// Use the card hover to control overlay
+.card:hover .overlay {
+  opacity: 1;
+  pointer-events: auto; // Re-enable interactions when visible
+}
+
+.overlayContent {
+  @include flex-center;
+  flex-direction: column;
+  text-align: center;
+  line-height: 1.55;
+  height: 100%;
+  overflow-y: auto;
+  p {
+    margin: spacing(xs) 0;
+    font-size: 0.65rem;
+  }
+  strong {
+    color: color(accent-gold);
+  }
+}
+
+.plot {
+  margin-top: spacing(sm);
+  font-style: italic;
+  font-size: 0.5rem !important;
+  opacity: 0.92;
+}
+
+.revealedText,
+.rating {
+  color: color(gold-dark) !important;
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.4),
+    0 1px 4px rgba(0, 0, 0, 1),
+    0 2px 8px rgba(0, 0, 0, 1),
+    0 4px 16px rgba(0, 0, 0, 1) !important;
+}
+
+.title {
+  margin: 0 0 spacing(xs);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1a202c;
+}
+
+.year {
+  margin: 0 0 spacing(xs);
+  font-size: 0.95rem;
+  opacity: 0.8;
+  color: #4a5568;
+}
+
+.genre {
+  align-self: end;
+}
+
+.markAsWatchedButton {
+  color: color(accent-gold);
+  background: color(primary-dark);
+  border-radius: 5px;
+  border-color: color(base-gold);
+  box-shadow: 1px 1px 1px 1px color(secondary-shadow);
+  cursor: pointer;
+  transition: scale 0.8s ease;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.undoButton {
+  background: color(overlay-medium);
+  position: absolute;
+  top: spacing(xs);
+  right: spacing(xs);
+  z-index: 5; // Above everything
+  font-size: 0.8rem;
+  opacity: 0.5;
+  border: none;
+  border-radius: 3px;
+  color: color(accent-silver);
+  padding: 2px 6px;
+  cursor: pointer;
+  transition: all 0.8s ease;
+
+  &:hover {
+    opacity: 1;
+    background: color(secondary);
+    transform: scale(1.1);
+  }
+}
+
+@include mobile {
+  * {
+    font-size: small;
+  }
+
+  .title,
+  .year {
+    font-size: medium;
+  }
+
+  .card {
+    padding: 0;
+    text-align: center;
+    align-items: center;
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .markAsWatchedButton {
+    margin-top: 10%;
+    padding: spacing(xs) spacing(xs);
+    font-size: 1rem;
+    font-weight: bold;
+
+    &:active {
+      scale: 0.95;
+    }
+  }
+
+  .undoButton {
+    padding: 4px 8px;
+    font-size: 1rem;
+
+    &:active {
+      opacity: 1;
+      background-color: color(secondary);
+      transform: scale(1.1);
+    }
+  }
+
+  // Mobile tap state
+  .overlayMobile {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .overlayContent {
+    font-size: 0.75rem;
+  }
+
+  .plot {
+    font-size: 0.65rem !important;
+  }
+}
+
+@include tablet {
+  .overlayMobile {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .plot {
+    font-size: 0.65rem !important;
+  }
+
+  .card {
+    outline: none;
+    transition: transform 0.2s ease;
+  }
+
+  .card:focus-within .overlay {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transition: opacity 0.2s ease;
+  }
+
+  .card:focus-within {
+    transform: scale(1.6) !important;
+    z-index: 50 !important;
+  }
+
+  .markAsWatchedButton {
+    padding: spacing(xs) spacing(xs);
+    font-size: 0.75rem;
+
+    .overlay[style*="opacity: 0"]:not(:has(+ .card:focus-within)) &,
+    .overlay:not(:hover):not(:has(+ .card:focus-within)) & {
+      pointer-events: none !important;
+    }
+
+    .card:focus-within & {
+      pointer-events: auto !important;
+    }
+
+    &:hover {
+      scale: none;
+    }
+    &:active {
+      scale: none;
+    }
+  }
+
+  .undoButton {
+    transition: all 0.2s ease;
+
+    &:active {
+      opacity: 1;
+      background: color(secondary);
+      transform: scale(1.1);
+    }
+  }
+}
+@include mobile {
+  .overlay {
+    opacity: 0;
+    pointer-events: auto !important;
+    transition: opacity 0.2s ease;
+  }
+
+  .card {
+    outline: none;
+    transition: transform 0.2s ease;
+  }
+
+  .card:focus-within .overlay,
+  .overlayMobile {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transition: opacity 0.2s ease;
+  }
+
+  .card:focus-within {
+    transform: scale(1.6) !important;
+    z-index: 50 !important;
+  }
+
+  .markAsWatchedButton {
+    padding: spacing(xs) spacing(xs);
+    font-size: 0.75rem;
+    transition: none;
+
+    .overlay[style*="opacity: 0"]:not(:has(+ .card:focus-within)) &,
+    .overlay:not(:hover):not(:has(+ .card:focus-within)) & {
+      pointer-events: none !important;
+    }
+
+    .card:focus-within & {
+      pointer-events: auto !important;
+    }
+
+    &:hover {
+      scale: none;
+    }
+    &:active {
+      scale: none;
+    }
+  }
+}

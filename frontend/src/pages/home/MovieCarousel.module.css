@@ -1,0 +1,117 @@
+.carouselWrapper {
+  width: 100vw;
+  max-width: 500px;
+  height: 575px;
+  margin: 0;
+  padding: 0;
+  border: 5px solid rgba(26, 20, 35, 0.85);
+  border-style: inset;
+  border-radius: 5px;
+  box-shadow: 0px 0.4rem 0.5rem 0.5rem rgba(212, 160, 23, 0.637);
+}
+
+.carouselTitle {
+  color: #E8E3E3;
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+  padding: 1rem 1.5rem 0;
+  text-align: center;
+  font-weight: 700;
+}
+@media (min-width: 768px) {
+  .carouselTitle {
+    font-size: 2rem;
+  }
+}
+
+.embla {
+  margin: 0;
+  padding: 1.5rem;
+  padding-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.emblaViewport {
+  overflow: hidden;
+  flex: 1;
+}
+
+.emblaContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.emblaSlide {
+  flex: 0 0 100%;
+  min-width: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.emblaImage {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  border-radius: 8px;
+  border: 2px solid #D4A017;
+  box-shadow: inset 0 0 30px rgba(255, 165, 0, 0.6);
+  margin: 0 auto;
+  padding: 0.5rem;
+  cursor: grab;
+}
+.emblaImage:active {
+  cursor: grabbing;
+}
+
+.emblaTitle {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #D8D8D8;
+  margin: 0;
+}
+
+.emblaButton {
+  color: #E8C547;
+  background: #4A1F63;
+  border: 3px solid #4A1F63;
+  border-style: outset;
+  border-radius: 5px;
+  border-color: #D4A017;
+  box-shadow: 1px 1px 1px 1px rgba(168, 32, 32, 0.4);
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+  transition: scale 0.2s ease;
+}
+.emblaButton:hover {
+  scale: 1.1;
+}
+.emblaButton:focus {
+  outline: 2px solid #D4A017;
+}
+.emblaButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+@media (max-width: 768px) {
+  .emblaButton {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .emblaTitle {
+    padding-top: 0.5rem;
+    font-size: 1.05rem;
+  }
+}
+@media (max-width: 768px) {
+  .carouselWrapper {
+    max-width: 95%;
+  }
+}/*# sourceMappingURL=MovieCarousel.module.css.map */

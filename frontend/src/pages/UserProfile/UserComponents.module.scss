@@ -1,0 +1,202 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+* {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.cardBorder {
+  // margin-bottom: spacing(lg);
+  border-radius: 3px;
+  margin-top: spacing(sm);
+  width: 95%;
+  height: 95%;
+  overflow: scroll;
+  // border: 1px solid color(primary-dark);
+  position: relative;
+
+  ul {
+    list-style-type: none;
+    margin-left: 0;
+    padding: 0;
+  }
+}
+
+.verticalProgressContainer {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: -2dvh;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 0;
+  min-height: 200px;
+}
+
+.progressTrack {
+  width: 20%;
+  min-height: 43dvh;
+  background: color(theme-white);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 2dvw #791079;
+  @include neon-glow(8s, 1.2rem);
+}
+
+.progressFill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 12px;
+  @include gradient;
+  background-position: center;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+.progressContent {
+  h2 {
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.12rem;
+    color: #791079;
+  }
+}
+
+.percentage {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #237c00;
+}
+
+.friendsTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+  margin-bottom: 4px;
+}
+
+.tableHeader tr th:first-child {
+  border-top-left-radius: 5px;
+}
+
+// Round top-right corner of last header cell
+.tableHeader tr th:last-child {
+  border-top-right-radius: 5px;
+}
+
+// Round bottom-left corner of first cell in last row
+.tableRow:last-child td:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+// Round bottom-right corner of last cell in last row
+.tableRow:last-child td:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+.tableHeader {
+  th {
+    padding: 12px 16px;
+    background: color(table-color-1);
+    box-shadow:
+      inset 1px 1px 2px rgba(0, 0, 0, 0.3),
+      inset -1px -1px 2px rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    border-right: 1px solid rgba(228, 209, 245, 0.5);
+  }
+}
+
+.colUsername {
+  padding: 12px 16px;
+  background: color(table-color-2);
+  box-shadow:
+    inset 1px 1px 2px rgba(0, 0, 0, 0.3),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(228, 209, 245, 0.5);
+}
+
+.colActions {
+  text-align: center;
+  padding: 12px 16px;
+  background: color(table-color-3);
+  box-shadow:
+    inset 1px 1px 2px rgba(0, 0, 0, 0.3),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(228, 209, 245, 0.5);
+}
+
+.tableRow:hover .colUsername {
+  background: #ece0f8;
+}
+
+.tableRow:hover .colActions {
+  background: #f4edfdc5;
+}
+
+.noRequests {
+  background: #e8d7f8;
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-style: italic;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.unfriendButton {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: color(secondary);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+  }
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  background: color(theme-white);
+  margin: 2dvh;
+  padding: 1dvh;
+  border-radius: 4px;
+}
+
+.foundUsers {
+  display: inline-flex;
+}
+
+.searchResults {
+  display: flex;
+  flex-direction: column;
+  gap: 1dvh;
+  border-radius: 4px;
+  font-weight: 600;
+  padding: 1dvw;
+  margin-top: 1dvh;
+  background: color(base-silver);
+
+  &:hover {
+    background: color(accent-silver);
+  }
+}
+
+.addButton {
+  cursor: pointer;
+  margin-left: auto;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: color(green);
+}
+
+@include tablet {
+  .progressTrack {
+    min-height: 30dvh;
+  }
+}

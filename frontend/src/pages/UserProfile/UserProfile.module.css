@@ -1,0 +1,220 @@
+.profilePage {
+  background: #100b16;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.userCards {
+  gap: 2dvh;
+  padding: 2dvh;
+  margin-bottom: 3dvh;
+  display: flex;
+  flex-direction: row;
+  min-height: 0;
+  height: 80dvh;
+}
+.userCards h2 {
+  margin-top: 0;
+  color: #D8D8D8;
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
+.userCards h3 {
+  font-size: 1.1rem;
+  color: #D8D8D8;
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
+
+.userCards > * {
+  color: #E8E3E3;
+  text-align: center;
+}
+
+.userInfoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  flex: 1;
+  border-radius: 20px;
+  padding: 1dvw;
+  background: #2D1B3A;
+  box-shadow: 0px 0.3rem 0.3em 0.3rem rgba(212, 160, 23, 0.637);
+}
+
+.userAddFriendsCard {
+  color: #2d3748;
+  text-shadow: 0 1px 3px #b5a6be;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  background: rgba(139, 26, 61, 0.3);
+  box-shadow: 0px 0.3rem 0.3em 0.3rem rgba(192, 192, 192, 0.637);
+}
+
+.userFriendsCard {
+  color: #2d3748;
+  text-shadow: 0 1px 3px #b5a6be;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  background: rgba(4, 21, 68, 0.7);
+  box-shadow: 0px 0.3rem 0.3em 0.3rem rgba(232, 197, 71, 0.637);
+}
+
+.userReelProgressCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  background: rgba(26, 20, 35, 0.85);
+  box-shadow: 0px 0.3rem 0.3em 0.3rem rgba(216, 216, 216, 0.637);
+}
+
+.userButtons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1dvh;
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding-left: 1dvh;
+  padding-right: 1dvh;
+}
+
+.modalButton {
+  font-size: 1.1rem;
+  color: #E8C547;
+  background: #4A1F63;
+  border-radius: 5px;
+  border-color: #D4A017;
+  box-shadow: 1px 1px 1px 1px rgba(168, 32, 32, 0.4);
+  cursor: pointer;
+  transition: scale 0.8s ease;
+}
+.modalButton:hover {
+  scale: 1.1;
+}
+.modalButton.buttonLoading {
+  background: #a0aec0;
+}
+.modalButton.buttonDisabled {
+  filter: grayscale(0.9);
+}
+
+.deleteButton {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  margin-left: auto;
+  justify-self: end;
+  background: #8B1A3D;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+.deleteButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.deleteButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.deleteButton.buttonLoading {
+  background: #a0aec0;
+}
+.deleteButton.buttonDisabled {
+  filter: grayscale(0.9);
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .profilePage {
+    overflow: visible;
+    padding-bottom: 8dvh;
+  }
+  .profilePage .userButtons {
+    padding-top: 9dvh;
+  }
+  .userCards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem 1rem;
+  }
+  .userCards h2 {
+    font-size: 1.5rem;
+  }
+  .userInfoCard {
+    height: 60dvh;
+    flex-basis: 40%;
+    overflow: scroll;
+    order: -1;
+  }
+  .userAddFriendsCard {
+    height: auto;
+    flex-basis: 40%;
+    overflow: hidden;
+    margin-bottom: 8dvh;
+  }
+  .userFriendsCard {
+    height: auto;
+    flex-basis: 40%;
+    overflow: hidden;
+    margin-bottom: 8dvh;
+  }
+  .userReelProgressCard {
+    flex-basis: 40%;
+    height: auto;
+    overflow: visible;
+    order: -1;
+  }
+}
+@media (max-width: 768px) {
+  .profilePage {
+    min-height: auto;
+    max-height: none;
+    padding-top: 7.9dvh;
+    overflow: visible;
+  }
+  .userCards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: auto;
+    margin-bottom: 0.5dvh;
+  }
+  .userInfoCard {
+    max-height: 60dvh;
+    width: 100%;
+    min-height: 60dvh;
+    overflow-y: auto;
+    margin-bottom: 2dvh;
+    max-width: 98%;
+  }
+  .userReelProgressCard {
+    min-height: 62dvh;
+    max-height: 62dvh;
+    width: 100%;
+    overflow-y: hidden;
+    order: -1;
+    margin-bottom: 2dvh;
+    max-width: 98%;
+  }
+  .userFriendsCard {
+    max-width: 98%;
+    margin-top: 2%;
+    flex-basis: auto;
+    width: 100%;
+    margin-bottom: 2dvh;
+  }
+}/*# sourceMappingURL=UserProfile.module.css.map */

@@ -1,0 +1,460 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+@use "sass:color";
+
+* {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2 {
+  text-align: center;
+  color: color(text-dark);
+  @include dark-text-shadow;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  @include flex-center;
+  z-index: 1000;
+}
+
+.modal {
+  @include flex-center;
+  position: relative;
+  background: rgba((color(secondary-shadow)), 0.25);
+  border-radius: radius(lg);
+  padding: spacing(xxl);
+  max-width: 30vw;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  outline: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: spacing(sm);
+  right: spacing(sm);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: color(text-light);
+  padding: spacing(xs);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    color: color(text-dark);
+    transform: scale(1.1);
+  }
+}
+
+// Form Styles - Shared across modal forms
+.modalForm {
+  background: color(modal-background);
+  padding: spacing(xxl);
+  border-radius: radius(lg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: auto;
+
+  h1 {
+    text-align: center;
+    margin-bottom: spacing(xl);
+    color: color(text-dark);
+  }
+
+  h3 {
+    color: color(text-dark);
+  }
+}
+
+.inputGroup {
+  margin-bottom: spacing(lg);
+  border-radius: 3px;
+
+  legend {
+    @include dark-text-shadow;
+    font-weight: 600;
+    margin-bottom: spacing(md);
+    color: color(text-dark);
+  }
+
+  .formField {
+    margin-bottom: spacing(md);
+  }
+
+  label {
+    display: block;
+    margin-bottom: spacing(sm);
+    font-weight: 600;
+    color: color(text-dark);
+  }
+}
+
+// Input Styles
+.modalInput {
+  width: 90%;
+  padding: spacing(md);
+  border: 1px solid color(accent-silver);
+  border-radius: radius(md);
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out; // Enhanced transition
+
+  &:focus {
+    outline: none;
+    border-color: color(primary);
+    transform: translateY(-1px);
+  }
+
+  &.inputError {
+    border-color: color(error);
+  }
+}
+
+.modalTextarea {
+  @extend .modalInput;
+  height: 20dvh;
+  resize: vertical;
+}
+
+// Status Messages
+.errorMessage {
+  color: color(error);
+  font-size: 0.875rem;
+  margin-top: spacing(xs);
+  display: block;
+}
+
+.apiError {
+  background: #fed7d7;
+  color: color(error);
+  padding: spacing(xs);
+  border-radius: radius(md);
+  margin-bottom: spacing(xl);
+  text-align: center;
+}
+
+.successMessage {
+  background: rgba(144, 238, 144, 0.527);
+  color: darkgreen;
+  padding: spacing(xs);
+  border-radius: radius(md);
+  margin-bottom: spacing(xl);
+  text-align: center;
+  align-self: center;
+}
+
+.generalMessage {
+  color: color(text-dark);
+  text-align: center;
+
+  ul {
+    li:nth-child(odd) {
+      list-style-type: disc;
+    }
+    li:nth-child(even) {
+      padding-left: 2%;
+      list-style: circle;
+      list-style-position: inside;
+    }
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+}
+
+// Button Styles
+.modalButton {
+  @include modal-action-button;
+  margin-left: 35%;
+  color: color(accent-gold);
+  background: color(primary-dark);
+  border-color: color(base-gold);
+  box-shadow: 1px 1px 1px 1px color(secondary-shadow);
+  cursor: pointer;
+  transition: scale 0.8s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(color(primary), 0.9);
+    scale: 1.1;
+  }
+}
+
+.buttonSection {
+  display: flex;
+  justify-content: space-around;
+}
+
+.deleteButton {
+  @include modal-action-button;
+  background: color(secondary);
+  color: color(white);
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+    transform: translateY(-1px);
+  }
+}
+
+.cancelButton {
+  @include modal-action-button;
+  background: color(green);
+  color: color(white);
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+    transform: translateY(-1px);
+  }
+}
+
+.friendsTable {
+  color: color(text-dark);
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
+.tableHeader tr th:first-child {
+  border-top-left-radius: 5px;
+}
+
+// Round top-right corner of last header cell
+.tableHeader tr th:last-child {
+  border-top-right-radius: 5px;
+}
+
+.tableHeader {
+  th {
+    padding: 8px 12px;
+    background: #dcc7f0;
+    box-shadow:
+      inset 1px 1px 2px rgba(0, 0, 0, 0.3),
+      inset -1px -1px 2px rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-right: 1px solid rgba(228, 209, 245, 0.5);
+    color: color(text-dark);
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.requestTableRow:hover .colUsername,
+.requestTableRow:hover .colActions {
+  background: color(table-color-1);
+}
+
+.requestTableRow:hover .colEmail {
+  background: color(table-color-2);
+}
+
+.requestTableRow {
+  cursor: default; // Not clickable like friends table
+
+  &:hover {
+    background-color: rgba(66, 34, 94, 0.1);
+  }
+}
+
+// Round bottom-left corner of first cell in last row
+.requestTableRow:last-child td:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+// Round bottom-right corner of last cell in last row
+.requestTableRow:last-child td:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+.colUsername,
+.colEmail,
+.colActions {
+  padding: 8px 12px;
+  background: color(table-color-1);
+  box-shadow:
+    inset 1px 1px 2px rgba(0, 0, 0, 0.3),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(228, 209, 245, 0.5);
+  font-size: 0.8rem;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.colEmail {
+  background: color(table-color-3);
+}
+
+.colActions {
+  padding: 8px 12px;
+  background: color(table-color-1);
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+
+  button {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.smallModalButton {
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  color: color(text-dark);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: color(accent-silver);
+    background: rgba(color(theme-black), 0.2);
+    border-radius: 4px;
+  }
+
+  &:active {
+    color: color(base-gold);
+    background: rgba(color(primary-dark), 0.2);
+  }
+}
+
+.acceptButton {
+  background: color(green);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: color.adjust(green, $lightness: -10%);
+  }
+}
+
+.declineButton {
+  background: color(secondary);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+  }
+}
+
+.noRequests {
+  background: #e8d7f8;
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-style: italic;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.navItem {
+  border-radius: 5px;
+  background: rgba(color(overlay-dark), 0.5);
+  padding: 0.2rem;
+  color: color(gold-dark);
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: background 0.2s;
+  cursor: pointer;
+  transition: all 0.8s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(color(primary), 0.9);
+    scale: 1.1;
+  }
+}
+
+.gitHubLogo {
+  max-height: 1.1rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.formlessMsg {
+  text-align: center;
+  color: color(text-dark);
+}
+
+// Responsive
+@include tablet {
+  .modal {
+    padding: spacing(md);
+    max-width: 95vw;
+  }
+
+  .modalForm {
+    padding: spacing(xl);
+    max-width: 75dvw;
+  }
+
+  .modalButton {
+    width: 50%;
+    margin-left: 25%;
+  }
+}
+
+.loadingMessage {
+  background: color(primary-dark);
+  color: color(primary);
+  padding: spacing(xs);
+  border-radius: radius(md);
+  margin-bottom: spacing(xl);
+  text-align: center;
+  align-self: center;
+  font-weight: 500;
+}
+
+@include mobile {
+  .modal {
+    padding: spacing(md);
+    max-width: 95vw;
+  }
+
+  .modalForm {
+    padding: spacing(xl);
+    max-width: 70dvw;
+  }
+
+  .modalButton {
+    width: 50%;
+    margin-left: 25%;
+  }
+}
+
+.loadingMessage {
+  background: color(primary-dark);
+  color: color(primary);
+  padding: spacing(xs);
+  border-radius: radius(md);
+  margin-bottom: spacing(xl);
+  text-align: center;
+  align-self: center;
+  font-weight: 500;
+}

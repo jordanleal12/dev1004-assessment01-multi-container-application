@@ -1,0 +1,28 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  @include flex-center;
+  align-items: center;
+  z-index: 100;
+  border-radius: radius(lg);
+}
+
+.loadingContent {
+  @include flex-center;
+  flex-direction: column;
+  align-items: center;
+  color: color(theme-white);
+  text-align: center;
+}
+
+.starsContainer {
+  @include flex-center;
+  gap: spacing(xs);
+  margin-bottom: spacing(sm);
+  font-size: 1.2rem;
+}

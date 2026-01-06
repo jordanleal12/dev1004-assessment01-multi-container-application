@@ -1,0 +1,237 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.profilePage {
+  background: color(background);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.userCards {
+  gap: 2dvh;
+  padding: 2dvh;
+  margin-bottom: 3dvh;
+  display: flex;
+  flex-direction: row;
+  min-height: 0; // Important for flex children
+  height: 80dvh;
+
+  h2 {
+    margin-top: 0;
+    color: color(accent-silver);
+    text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    color: color(accent-silver);
+    text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+  }
+}
+
+.userCards > * {
+  color: color(text-light);
+  text-align: center;
+}
+
+.userInfoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  flex: 1;
+  border-radius: 20px;
+  padding: 1dvw;
+  background: color(soft-background);
+  box-shadow: 0px 0.3rem 0.3em 0.3rem rgba(color(base-gold), 0.637);
+}
+
+.userAddFriendsCard {
+  color: color(card-grey);
+  text-shadow: 0 1px 3px color(theme-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  background: rgba(color(secondary), 0.3);
+  box-shadow: 0px 0.3rem 0.3em 0.3rem rgba(color(base-silver), 0.637);
+}
+
+.userFriendsCard {
+  color: color(card-grey);
+  text-shadow: 0 1px 3px color(theme-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  background: color(overlay-medium);
+  box-shadow: 0px 0.3rem 0.3em 0.3rem rgba(color(accent-gold), 0.637);
+}
+
+.userReelProgressCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  background: color(overlay-dark);
+  box-shadow: 0px 0.3rem 0.3em 0.3rem rgba(color(accent-silver), 0.637);
+}
+
+.userButtons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1dvh;
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding-left: 1dvh;
+  padding-right: 1dvh;
+}
+
+.modalButton {
+  font-size: 1.1rem;
+  color: color(accent-gold);
+  background: color(primary-dark);
+  border-radius: 5px;
+  border-color: color(base-gold);
+  box-shadow: 1px 1px 1px 1px color(secondary-shadow);
+  cursor: pointer;
+  transition: scale 0.8s ease;
+
+  &:hover {
+    scale: 1.1;
+  }
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(0.9);
+  }
+}
+
+.deleteButton {
+  @include button-reset;
+  margin-left: auto;
+  justify-self: end;
+  background: color(secondary);
+  color: color(white);
+  border-radius: radius(md);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+    transform: translateY(-1px);
+  }
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(0.9);
+  }
+}
+
+@include tablet {
+  .profilePage {
+    overflow: visible;
+    padding-bottom: 8dvh;
+
+    .userButtons {
+      padding-top: 9dvh;
+    }
+  }
+
+  .userCards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem 1rem;
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .userInfoCard {
+    height: 60dvh;
+    flex-basis: 40%;
+    overflow: scroll;
+    order: -1;
+  }
+
+  .userAddFriendsCard {
+    height: auto;
+    flex-basis: 40%;
+    overflow: hidden;
+    margin-bottom: 8dvh;
+  }
+
+  .userFriendsCard {
+    height: auto;
+    flex-basis: 40%;
+    overflow: hidden;
+    margin-bottom: 8dvh;
+  }
+
+  .userReelProgressCard {
+    flex-basis: 40%;
+    height: auto;
+    overflow: visible;
+    order: -1;
+  }
+}
+
+@include mobile {
+  .profilePage {
+    min-height: auto;
+    max-height: none;
+    padding-top: 7.9dvh;
+    overflow: visible;
+  }
+
+  .userCards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: auto;
+    margin-bottom: 0.5dvh;
+  }
+
+  .userInfoCard {
+    max-height: 60dvh;
+    width: 100%;
+    min-height: 60dvh;
+    overflow-y: auto;
+    margin-bottom: 2dvh;
+    max-width: 98%;
+  }
+
+  .userReelProgressCard {
+    min-height: 62dvh;
+    max-height: 62dvh;
+    width: 100%;
+    overflow-y: hidden;
+    order: -1;
+    margin-bottom: 2dvh;
+    max-width: 98%;
+  }
+
+  .userFriendsCard {
+    max-width: 98%;
+    margin-top: 2%;
+    flex-basis: auto;
+    width: 100%;
+    margin-bottom: 2dvh;
+  }
+}

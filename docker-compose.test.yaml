@@ -1,0 +1,20 @@
+services:
+  backend-test:
+    build: ./backend
+    environment:
+      - NODE_ENV=test
+      - OMDB_API_KEY=${OMDB_API_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    command: npm test
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend-test:
+    build: ./frontend
+    environment:
+      - CI=true
+    command: npm test
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules

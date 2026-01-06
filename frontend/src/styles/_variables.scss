@@ -1,0 +1,71 @@
+@use "sass:map";
+
+// GLOBAL VARIABLES only. Should not cause conflicts if used correctly.
+$colors: (
+  primary: #5D2A7A,
+  primary-dark: #4A1F63,
+  secondary: #8B1A3D,
+  error: #A63232,
+  success: #D4A017,
+  text-dark: #273346,
+  text-light: #E8E3E3,
+  background: #100b16,
+  soft-background: #2D1B3A,
+  modal-background: #b1a6af,
+  theme-white: #b5a6be,
+  theme-black: #000000,
+  gold-dark: #ff8c00,
+  base-gold: #D4A017,           // Same as success – for stars, highlights
+  base-silver: #C0C0C0,         // Metallic silver – borders, icons
+  accent-gold: #E8C547,    // Brighter gold for hover/active
+  accent-silver: #D8D8D8,  // Lighter silver for subtle glow
+  overlay-dark: rgba(26, 20, 35, 0.85), // For poster overlay
+  overlay-medium: rgba(4, 21, 68, 0.7),
+  overlay-light: rgba(186, 123, 211, 0.7),
+  secondary-shadow: rgba(168, 32, 32, 0.4),
+  card-grey: #2d3748,
+  green: rgba(18, 94, 18, 0.897),
+  table-color-1: #dcc7f0,
+  table-color-2: #e8d7f8,
+  table-color-3: #e8d7f8c5,
+);
+
+// Spacing - consistent scale
+$spacing: (
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 1rem,
+  lg: 1.5rem,
+  xl: 2rem,
+  xxl: 3rem,
+);
+
+// Breakpoints for responsive design
+$breakpoints: (
+  mobile: 768px,
+  tablet: 1024px,
+  desktop: 1281px,
+);
+
+// Border radius
+$border-radius: (
+  sm: 4px,
+  md: 8px,
+  lg: 12px,
+);
+
+@function color($key) {
+  @return map.get($colors, $key);
+}
+
+@function spacing($key) {
+  @return map.get($spacing, $key);
+}
+
+@function breakpoint($key) {
+  @return map.get($breakpoints, $key);
+}
+
+@function radius($key) {
+  @return map.get($border-radius, $key);
+}

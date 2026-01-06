@@ -1,0 +1,144 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.reelCanon {
+  padding: spacing(xl) spacing(md);
+  //   max-width: 1400px;
+  margin: 0 auto;
+  background: color(background);
+  min-height: 100vh;
+  color: color(text-dark);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: spacing(xl);
+
+  h1 {
+    font-size: 2.8rem;
+    margin: 0 0 spacing(sm);
+    font-weight: 700;
+    color: color(base-silver);
+    text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: color(accent-silver);
+    margin: 0 0 spacing(md);
+  }
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing(md);
+  justify-content: center; // optional: center cards
+  margin: 0 auto;
+  padding: 0 spacing(sm); // prevent overflow
+}
+
+// Each card takes min 240px, grows to fill
+.grid > * {
+  flex: 1 1 165px;
+  min-height: 300px;
+  max-width: 165px;
+}
+
+// .apiError {
+//   background: #fed7d7;
+//   color: color(error);
+//   padding: spacing(xs);
+//   border-radius: radius(md);
+//   margin-bottom: spacing(xl);
+//   text-align: center;
+// }
+
+// .errorMessage {
+//   text-align: center;
+//   color: color(error);
+//   font-size: 0.875rem;
+//   margin-top: spacing(xs);
+//   display: block;
+// }
+
+// .errorContainer {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   text-align: center;
+//   padding: spacing(xl);
+//   background: color(theme-white);
+//   border-radius: radius(lg);
+//   box-shadow: shadow(md);
+//   position: fixed; // or absolute
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   width: 90%;
+//   max-width: 500px;
+//   z-index: 1000;
+// }
+
+// .retryButton {
+//   margin-top: spacing(md);
+// }
+
+// Responsive
+@include mobile {
+  .reelCanon {
+    margin-top: 7.5dvh;
+    max-width: 100dvw;
+  }
+
+  .title h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+  .title h2 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .grid {
+    gap: spacing(md);
+    padding-bottom: 2dvh;
+  }
+
+  .grid > * {
+    flex: 1 1 40dvw !important; // Fits 2 columns nicely
+    min-height: 140px !important;
+    max-width: 40dvw !important;
+  }
+
+  // .errorContainer {
+  //   padding: spacing(lg);
+  //   width: 95%;
+  // }
+}
+
+@include tablet {
+  .reelCanon {
+    margin-top: 7dvh;
+  }
+
+  .grid > * {
+    flex: 1 1 20dvw !important; // Fits 2 columns nicely
+    // min-height: 200px !important;
+    // max-height: 400px;
+  }
+
+  .title h1 {
+    font-size: 2.4rem;
+  }
+
+  .title h2 {
+    font-size: 1.15rem;
+  }
+
+  // .errorContainer {
+  //   width: 85%;
+  // }
+}

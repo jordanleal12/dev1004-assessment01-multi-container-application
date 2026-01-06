@@ -1,0 +1,35 @@
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  background: #b5a6be;
+  border-radius: 12px;
+  box-shadow: shadow(md);
+  margin: auto;
+  width: 90%;
+  max-width: 500px;
+  color: #A63232;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+}
+
+.errorMessage {
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.retryButton {
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .errorContainer {
+    width: 95%;
+    padding: 0.5rem;
+  }
+}/*# sourceMappingURL=ErrorMessage.module.css.map */

@@ -1,0 +1,167 @@
+// Default styles from react-burger-menu with personalized customizations
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+/* Wrapper for burger menu component */
+.burger-menu-wrapper {
+  @media (min-width: breakpoint(tablet)) {
+    display: none !important;
+  }
+}
+
+.bm-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  touch-action: none;
+  background: rgba(0, 0, 0, 0.3);
+  height: 100% !important;
+  z-index: 999 !important;
+  // height: auto !important;
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  left: 15px;
+  top: 15px;
+  z-index: 1000;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: color(base-gold);
+  box-shadow: 0 2px 4px color(primary-dark);
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: color(primary-dark);
+  box-shadow: 0 2px 4px color(base-gold);
+  opacity: 1 !important;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 30px !important;
+  width: 30px !important;
+  right: -15px !important;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: color(text-light);
+  height: 20px !important;
+  width: 5px !important;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+  max-width: 15em;
+  z-index: 1000;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: color(soft-background);
+  padding: 2.5em 0.7em 0;
+  font-size: 1.15em;
+  width: 110%;
+  // height: auto !important;
+  // display: flex;
+  // flex-direction: column;
+  // position: fixed !important;
+  // top: 0 !important;
+  // bottom: 0 !important;
+  touch-action: none;
+  // overflow: visible !important;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: color(soft-background);
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0em;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Individual item */
+.bm-item {
+  color: color(text-light);
+  font-size: 1.5rem;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  border-bottom: 1px solid color(success);
+  transition: all 0.3s ease 0s !important;
+  white-space: nowrap;
+}
+
+.bm-item:hover {
+  color: color(primary-dark);
+  background-color: color(base-gold);
+  transform: scale(1.1) !important;
+}
+
+.bm-item.active {
+  color: color(background);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  background-color: color(secondary);
+}
+
+/* Logo at bottom of menu */
+.bm-menu img {
+  margin-top: auto;
+  align-self: center;
+  padding: 20px;
+  border-bottom: none;
+  border-radius: 50%;
+  max-width: 100%;
+  pointer-events: none;
+}
+// Remove hover effect on logo
+.bm-menu img:hover {
+  background: none;
+}
+
+/* FontAwesome icons in menu items */
+.bm-item svg {
+  margin-right: 8px;
+}
+
+.bm-menu p {
+  color: color(text-light);
+  font-size: 0.9rem;
+  text-align: center;
+  white-space: normal;
+  border: none;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+// Media breakpoints
+@media (min-width: breakpoint(tablet)) {
+  .bm-overlay,
+  .bm-burger-button,
+  .bm-menu-wrap {
+    display: none !important;
+  }
+}

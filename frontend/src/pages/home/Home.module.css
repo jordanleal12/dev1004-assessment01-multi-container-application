@@ -1,0 +1,68 @@
+.home {
+  grid-row: 2;
+  padding: 2rem 1rem;
+  background: #100b16;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #273346;
+}
+.home .podiumSection {
+  height: 575px;
+}
+@media (max-width: 1024px) {
+  .home {
+    padding-top: 3rem;
+  }
+}
+.home h1 {
+  font-size: 2.8rem;
+  margin: 0;
+  font-weight: 700;
+  color: #C0C0C0;
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
+.home h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #C0C0C0;
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
+.home p {
+  max-width: 100rem;
+  line-height: 1;
+  color: #E8E3E3;
+  font-size: 1.1rem;
+}
+.home .homeFeatures {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: space-between;
+  justify-content: space-evenly;
+  padding-top: 25px;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .home {
+    margin-top: 7dvh;
+  }
+  .homeFeatures {
+    gap: 4dvh;
+    padding-bottom: 2dvh;
+  }
+}
+@media (max-width: 768px) {
+  .home {
+    margin-top: 7.5dvh;
+    max-width: 100dvw;
+  }
+  .homeFeatures {
+    max-width: 90dvw;
+    gap: 4dvh;
+    padding-bottom: 2dvh;
+  }
+}/*# sourceMappingURL=Home.module.css.map */

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Century Screening Room</title>
+    <!-- StyleSheet for the loading index screen -->
+    <style>
+      #initial-loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #100b16;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        font-family: system-ui, sans-serif;
+      }
+
+      .film-reel {
+        font-size: 4rem;
+        animation: spin 2s linear infinite;
+        filter: drop-shadow(0 0 10px #e8c547);
+      }
+
+      .loading-text {
+        color: #e8c547;
+        font-size: 1.2rem;
+        margin-top: 2rem;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Adds an HTML base loading screen -->
+    <div id="initial-loading-screen">
+      <div>
+        <div class="film-reel">🎬</div>
+        <div class="loading-text">Loading The Century Screening Room...</div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- Removes the html loading screen once react app loads -->
+    <script>
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          const loadingScreen = document.getElementById("initial-loading-screen");
+          if (loadingScreen) {
+            loadingScreen.style.opacity = "0";
+            loadingScreen.style.transition = "opacity 0.5s ease";
+            setTimeout(() => loadingScreen.remove(), 500);
+          }
+        }, 1000); // Minimum show time (1 second)
+      });
+    </script>
+  </body>
+</html>

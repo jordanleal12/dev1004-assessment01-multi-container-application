@@ -1,0 +1,128 @@
+// @use "sass:map";
+@use "variables" as *;
+
+@mixin light-text-shadow {
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
+
+@mixin dark-text-shadow {
+  text-shadow: 0 2px 4px rgba(118, 210, 223, 0.664);
+}
+
+// Flexbox helpers
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin gradient {
+  background: linear-gradient(
+    135deg,
+    #d4a017 0%,
+    #e0b123 15%,
+    #e8c547 30%,
+    #c47433 50%,
+    #b44846 65%,
+    #a63232 75%,
+    #8b1a3d 85%,
+    #762352 92%,
+    #5d2a7a 100%
+  );
+}
+
+@mixin neon-glow($duration: 5s, $spread: 0.5rem) {
+  animation: neonGlow $duration infinite alternate;
+  @keyframes neonGlow {
+    0% {
+      box-shadow:
+        0 0 $spread #d4a017,
+        0 0 calc($spread * 2) #d4a017;
+    }
+    15% {
+      box-shadow:
+        0 0 $spread #e8c547,
+        0 0 calc($spread * 2) #e8c547;
+    }
+    30% {
+      box-shadow:
+        0 0 $spread #c47433,
+        0 0 calc($spread * 2) #c47433;
+    }
+    45% {
+      box-shadow:
+        0 0 $spread #b44846,
+        0 0 calc($spread * 2) #b44846;
+    }
+    60% {
+      box-shadow:
+        0 0 $spread #a63232,
+        0 0 calc($spread * 2) #a63232;
+    }
+    75% {
+      box-shadow:
+        0 0 $spread #8b1a3d,
+        0 0 calc($spread * 2) #8b1a3d;
+    }
+    90% {
+      box-shadow:
+        0 0 $spread #762352,
+        0 0 calc($spread * 2) #762352;
+    }
+    100% {
+      box-shadow:
+        0 0 $spread #5d2a7a,
+        0 0 calc($spread * 2) #5d2a7a;
+    }
+  }
+}
+
+// Responsive breakpoints
+@mixin mobile {
+  @media (max-width: breakpoint(mobile)) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: (breakpoint(mobile) + 1)) and (max-width: breakpoint(tablet)) {
+    @content;
+  }
+}
+
+// Button reset
+@mixin button-reset {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// Modal action button mixin (shared styles for modalButton, deleteButton, cancelButton)
+@mixin modal-action-button {
+  @include button-reset;
+  width: 30%;
+  margin-top: 5%;
+  padding: spacing(md);
+  font-size: 1rem;
+  border-radius: radius(md);
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(0.9);
+  }
+}

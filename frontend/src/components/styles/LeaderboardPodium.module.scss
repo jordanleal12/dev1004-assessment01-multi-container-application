@@ -1,0 +1,78 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.podiumSection {
+  background: color(overlay-medium);
+  box-shadow: 0px 0.4rem 0.5rem 0.5rem rgba(color(base-silver), 0.637);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  border: 5px solid color(overlay-dark);
+  border-style: inset;
+  border-radius: 5px;
+}
+
+.podiumTitle {
+  color: color(base-silver);
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
+
+.podiumContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  align-items: center;
+  // gap: spacing(md);
+  max-width: 500px;
+
+  .podiumPlace {
+    @include flex-center;
+    flex-direction: column;
+    // width: 150px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: spacing(sm);
+    width: 200px;
+    height: 200px;
+    border-radius: radius(md);
+    background-color: color(soft-background);
+
+    figcaption {
+      margin: spacing(xs);
+      color: color(text-light);
+      font-weight: 600;
+    }
+
+    img {
+      margin-top: spacing(sm);
+      max-width: 125px;
+    }
+  }
+
+  .first {
+    order: 3;
+    border: 5px solid color(accent-gold);
+  }
+  .second {
+    order: 2;
+    border: 5px solid color(base-silver);
+  }
+  .third {
+    order: 1;
+    border: 5px solid Peru;
+  }
+}
+
+.first {
+  width: 150px;
+}
+
+@include mobile {
+  h2 {
+    font-size: 1.5rem;
+  }
+}

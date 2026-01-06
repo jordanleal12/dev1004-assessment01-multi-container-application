@@ -8,6 +8,7 @@ services:
     ports:
       - "5000:5000"
     environment:
+      # Pass sensitive info using root level environment variables and hardcode the rest
       - NODE_ENV=development
       - LOCAL_DB_URI=mongodb://mongo_db:27017/movie_db
       - OMDB_API_KEY=${OMDB_API_KEY}
@@ -47,6 +48,7 @@ services:
     ports:
       - "27017:27017" # Exposed for local debugging tools (like Compass)
     volumes:
+      # Docker managed named volume for isolated, persistent storage that containers can share
       - mongo-data:/data/db
     networks:
       - mern-network
@@ -54,6 +56,7 @@ services:
 # Define the network
 networks:
   mern-network:
+    # Bridge networks allow containers to communicate internally without exposing ports
     driver: bridge
 
 # Define the volume for persistent database storage

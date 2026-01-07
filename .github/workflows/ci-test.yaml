@@ -1,0 +1,50 @@
+name: CI Tests
+
+on:
+  pull_request:
+    # Default types are opened, synchronize and reopened
+    branches:
+      - main
+  # Allows manual triggering of the actions workflow from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  # Allowed by default but good to be explicit and follow least privilege
+  contents: read
+
+env:
+  # Defining at top level makes available to all jobs. If not needed for all, define at job level
+  OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+  JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+  DATABASE_URI: ${{ secrets.DATABASE_URI }}
+
+concurrency:
+  # Dynamically assign group name based off current workflow and current ref (PR branch)
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Cancel in progress runs in same group if a new run is triggered (i.e. multiple  commits at once)
+  cancel-in-progress: true
+
+jobs:
+  run_tests: # Job ID
+    name: Run Tests
+    # Specify container environment
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository to runner
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      # Build images using docker-compose.test.yaml. Separate build and run steps improves debugging
+      - name: Build Docker Images Using Test Compose
+        run: docker compose -f docker-compose.test.yaml build
+
+      # Run backend container tests
+      - name: Run Backend Tests
+        run: docker compose -f docker-compose.test.yaml run --rm backend-test
+
+      # Run frontend container tests
+      - name: Run Frontend Tests
+        # Still run frontend tests if backend tests fail
+        if: always()
+        run: docker compose -f docker-compose.test.yaml run --rm frontend-test

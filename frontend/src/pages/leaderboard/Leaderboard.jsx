@@ -7,7 +7,7 @@ import ErrorMessage from "../../components/common/ErrorMessage";
 
 export default function Leaderboard() {
   const { data, isLoading, error, refetch } = useLeaderboard();
-  const topRankings = data?.reelProgressData.slice(0, 3).map((e) => e._id) || [];
+  const topRankings = data?.reelProgressData?.slice(0, 3).map((e) => e._id) || [];
 
   if (isLoading) return <LoadingSpinner />;
 

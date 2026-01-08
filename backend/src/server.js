@@ -43,7 +43,7 @@ app.use(
 app.use(
   cors({
     // Replace with deployed frontend URL when applicable and update test in server.test.js
-    origin: ['http://localhost:3000', 'https://the-reel-canon.netlify.app'],
+    origin: ['http://localhost:3000', 'https://the-reel-canon.netlify.app', 'http://localhost'],
     optionsSuccessStatus: 200,
   }),
 );

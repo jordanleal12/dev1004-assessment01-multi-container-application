@@ -2,6 +2,7 @@ services:
   # Backend Service
   backend-test:
     build: ./backend
+    container_name: backend_test_container
     environment:
       # Pass sensitive info using root level environment variables and hardcode the rest
       - NODE_ENV=test
@@ -18,6 +19,7 @@ services:
   # Frontend Service
   frontend-test:
     build: ./frontend
+    container_name: frontend_test_container
     environment:
       # Tells jest/vitest that tests are running in CI environment, so they exit after running
       - CI=true

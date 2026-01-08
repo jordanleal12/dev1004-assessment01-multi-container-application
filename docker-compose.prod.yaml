@@ -1,0 +1,41 @@
+services:
+  # Backend Service
+  backend:
+    # Specify route to root folder of backend service
+    build: ./backend
+    container_name: backend_prod_container
+    command: npm run start
+    # Port mapping required to communicate with mongo atlas db
+    ports:
+      - "5000:5000"
+    environment:
+      # Pass sensitive info using root level environment variables and hardcode the rest
+      - NODE_ENV=production
+      - DATABASE_URI=${DATABASE_URI}
+      - OMDB_API_KEY=${OMDB_API_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - TOKEN_HEADER_KEY=authorization
+    networks:
+      - production-mern-network
+
+  # Frontend Service
+  frontend:
+    build:
+      # Specify route to root folder of frontend service
+      context: ./frontend
+      # Specify which Dockerfile to use for production build
+      dockerfile: Dockerfile.prod
+      args:
+        - VITE_API_URL=http://localhost:5000
+    container_name: frontend_prod_container
+    ports:
+      # Map container port for dev and prod as it is needed to access application
+      - "80:80"
+    networks:
+      - production-mern-network
+
+# Define the network
+networks:
+  production-mern-network:
+    # Bridge networks allow containers to communicate internally without exposing ports
+    driver: bridge

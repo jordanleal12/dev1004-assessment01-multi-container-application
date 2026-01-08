@@ -14,6 +14,12 @@ RUN npm ci
 # Copy remaining app code for build step
 COPY . .
 
+# Accept build argument for API URL with default value if not provided
+ARG VITE_API_URL=http://localhost:5000
+
+# Convert to environment variable so Vite can use it
+ENV VITE_API_URL=$VITE_API_URL
+
 # Run the build command to create dist folder/files
 RUN npm run build
 

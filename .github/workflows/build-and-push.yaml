@@ -21,6 +21,8 @@ jobs:
       # Checkout repository to runner
       - name: Checkout Repo
         uses: actions/checkout@v6
+        with:
+          fetch-tags: true
 
       # Configure AWS credentials using IAM role with appropriate permissions to access ECR
       - name: Configure AWS Credentials

@@ -1,0 +1,71 @@
+name: Build and Push Images to ECR
+
+on:
+  push:
+    # Triggers on version bump
+    tags: ["v*"]
+  # Allows manual triggering of the actions workflow from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  # Allowed by default but good to be explicit and follow least privilege
+  contents: read
+
+jobs:
+  build_and_push_to_ECR: # Job ID
+    name: Build and Push Images to ECR
+    # Specify container environment
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository to runner
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+
+      # Configure AWS credentials using IAM role with appropriate permissions to access ECR
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Login to ECR on AWS so we can push images
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Create image tags dynamically based on version and git SHA
+      - name: Create Image Tags
+        id: create_tags
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
+            TAG="${GITHUB_REF#refs/tags/v}-${GITHUB_SHA::7}"
+          else
+            LATEST_TAG=$(git describe --tags --abbrev=0)
+            TAG="${LATEST_TAG}-manual-${GITHUB_SHA::7}"
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+          echo "Created image tag: ${TAG}"
+
+      # Build backend image
+      - name: Build Backend Image
+        # Get ECR registry URL from login and use created tag from tag step
+        run: |
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/reel-canon/backend:${{ steps.create_tags.outputs.tag }} \
+          -f ./backend/Dockerfile ./backend
+
+      # Push backend image to ECR
+      - name: Push Backend Image to ECR
+        run: docker push ${{ steps.login-ecr.outputs.registry }}/reel-canon/backend:${{ steps.create_tags.outputs.tag }}
+
+      # Build frontend image
+      - name: Build Frontend Image
+        # Get ECR registry URL from login and use created tag from tag step
+        run: |
+          docker build --build-arg VITE_API_URL=http://backend-service.reel-canon-namespace:5000 -t \
+          ${{ steps.login-ecr.outputs.registry }}/reel-canon/frontend:${{ steps.create_tags.outputs.tag }} \
+          -f ./frontend/Dockerfile.prod ./frontend
+
+      # Push frontend image to ECR
+      - name: Push Frontend Image to ECR
+        run: docker push ${{ steps.login-ecr.outputs.registry }}/reel-canon/frontend:${{ steps.create_tags.outputs.tag }}

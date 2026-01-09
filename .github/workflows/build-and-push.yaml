@@ -44,7 +44,7 @@ jobs:
           if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
             TAG="${GITHUB_REF#refs/tags/v}-${GITHUB_SHA::7}"
           else
-            LATEST_TAG=$(git describe --tags --abbrev=0)
+            LATEST_TAG=$(git tag --sort=-version:refname | head -1)
             TAG="${LATEST_TAG}-manual-${GITHUB_SHA::7}"
           fi
           echo "tag=${TAG}" >> $GITHUB_OUTPUT

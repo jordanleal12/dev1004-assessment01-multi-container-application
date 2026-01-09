@@ -22,7 +22,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v6
         with:
-          fetch-tags: true
+          fetch-depth: 0 # Fetch all history for tags
 
       # Configure AWS credentials using IAM role with appropriate permissions to access ECR
       - name: Configure AWS Credentials

@@ -73,7 +73,7 @@ jobs:
       - name: Build Frontend Image
         # Get ECR registry URL from login and use created tag from tag step
         run: |
-          docker build --build-arg VITE_API_URL=http://reel-canon-backend-service:5000 -t \
+          docker build --build-arg VITE_API_URL=${{ secrets.BACKEND_URL }} -t \
           ${{ steps.login-ecr.outputs.registry }}/reel-canon/frontend:${{ steps.create_tags.outputs.tag }} \
           -f ./frontend/Dockerfile.prod ./frontend
 

@@ -111,6 +111,13 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   });
 }
 
+// Health endpoint for health check when deployed on ECS
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    readyState: mongoose.connection.readyState,
+  });
+});
+
 // Add basic landing page message
 app.get('/', (req, res) => {
   res.json({

@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all history for tags
 
-      # Configure AWS credentials using IAM role with appropriate permissions to access ECR
+      # Configure AWS credentials using IAM user with appropriate permissions to access ECR
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v5
         with:
@@ -49,6 +49,14 @@ jobs:
           fi
           echo "tag=${TAG}" >> $GITHUB_OUTPUT
           echo "Created image tag: ${TAG}"
+          echo "${TAG}" > tag.txt
+
+      # Upload tag txt file created from last step as artifact for use in deploy workflow
+      - name: Upload Tag Artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: tag
+          path: tag.txt
 
       # Build backend image
       - name: Build Backend Image
@@ -65,7 +73,7 @@ jobs:
       - name: Build Frontend Image
         # Get ECR registry URL from login and use created tag from tag step
         run: |
-          docker build --build-arg VITE_API_URL=http://backend-service.reel-canon-namespace:5000 -t \
+          docker build --build-arg VITE_API_URL=http://reel-canon-backend-service:5000 -t \
           ${{ steps.login-ecr.outputs.registry }}/reel-canon/frontend:${{ steps.create_tags.outputs.tag }} \
           -f ./frontend/Dockerfile.prod ./frontend
 

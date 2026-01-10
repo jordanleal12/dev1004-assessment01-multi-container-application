@@ -5,7 +5,6 @@ on:
     # Triggers on successful completion of build-and-push workflow
     workflows: ["Build and Push Images to ECR"]
     types: [completed]
-    branches: [main]
   # Allows manual triggering of the actions workflow from the Actions tab
   workflow_dispatch:
     # Specify image tag to be deployed when manually triggering workflow
@@ -91,7 +90,7 @@ jobs:
               {"key": "Service", "value": "backend"}
             ]
           # Resource configuration
-          cpu: "512"
+          cpu: "256"
           memory: "1024"
           # Network configuration
           subnets: subnet-00b48d66e1d0e3e98, subnet-04cd9e3545d4d6d49
@@ -99,7 +98,7 @@ jobs:
           # Service configuration
           health-check-path: /health
           # Auto scaling configuration
-          min-task-count: 1
+          min-task-count: 2
           max-task-count: 4
           auto-scaling-metric: AVERAGE_CPU
           auto-scaling-target-value: 70
@@ -131,14 +130,14 @@ jobs:
               {"key": "Service", "value": "frontend"}
             ]
           # Resource configuration
-          cpu: "512"
-          memory: "1024"
+          cpu: "256"
+          memory: "512"
           # Network configuration
           subnets: subnet-00b48d66e1d0e3e98, subnet-04cd9e3545d4d6d49
           security-groups: sg-050a6b8cc7b55051b
           health-check-path: /
           # Auto-scaling configuration
-          min-task-count: 1
+          min-task-count: 2
           max-task-count: 4
           auto-scaling-metric: AVERAGE_CPU
           auto-scaling-target-value: 70

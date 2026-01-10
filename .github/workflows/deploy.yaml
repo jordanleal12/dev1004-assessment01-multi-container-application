@@ -1,0 +1,151 @@
+name: Deploy to Amazon ECS
+
+on:
+  workflow_run:
+    # Triggers on successful completion of build-and-push workflow
+    workflows: ["Build and Push Images to ECR"]
+    types: [completed]
+    branches: [main]
+  # Allows manual triggering of the actions workflow from the Actions tab
+  workflow_dispatch:
+    # Specify image tag to be deployed when manually triggering workflow
+    inputs:
+      tag:
+        description: "Provide image tag for manual deployment (e.g. 1.0.0-abc1234)"
+        required: true
+
+permissions:
+  # Allowed by default but good to be explicit and follow least privilege
+  contents: read
+
+env:
+  # Save registry as global env variable to keep DRY
+  ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Only run if manually dispatched or build-and-push workflow succeeded
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      # Configure AWS credentials using IAM user with appropriate permissions to access ECR
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Download tag artifact from build-and-push workflow
+      - name: Download Tag Artifact
+        # Only download if triggered automatically not manually
+        if: github.event_name == 'workflow_run'
+        uses: actions/download-artifact@v7
+        with:
+          # Require github token to access artifacts from another workflow
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: tag
+          run-id: ${{ github.event.workflow_run.id }}
+          # Download artifact to root
+          path: .
+
+      # Get image tag from tag artifact or manual input if triggered manually
+      - name: Get Image Tag
+        id: get_tag
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_run" ]]; then
+            TAG=$(cat tag.txt)
+          else
+            TAG="${{ github.event.inputs.tag }}"
+          fi
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "Image tag: $TAG"
+
+      # Deploy the backend service using new ecs deploy express action
+      - name: Deploy Backend Service
+        id: deploy-backend
+        uses: aws-actions/amazon-ecs-deploy-express-service@v1
+        with:
+          # Required inputs
+          service-name: reel-canon-backend-service
+          image: ${{ env.ECR_REGISTRY }}/reel-canon/backend:${{ steps.get_tag.outputs.tag }}
+          execution-role-arn: ${{ secrets.ECS_EXECUTION_ROLE_ARN }}
+          infrastructure-role-arn: ${{ secrets.ECS_INFRASTRUCTURE_ROLE_ARN }}
+          # Service identification
+          cluster: reel-canon-cluster
+          # Container configuration
+          container-port: 5000
+          environment-variables: |
+            [
+              {"name": "NODE_ENV", "value": "production"},
+              {"name": "TOKEN_HEADER_KEY", "value": "authorization"},
+              {"name": "DATABASE_URI", "value": "${{ secrets.DATABASE_URI }}"},
+              {"name": "JWT_SECRET_KEY", "value": "${{ secrets.JWT_SECRET_KEY }}"},
+              {"name": "OMDB_API_KEY", "value": "${{ secrets.OMDB_API_KEY }}"}
+            ]
+          tags: |
+            [
+              {"key": "Environment", "value": "production"},
+              {"key": "Application", "value": "reel-canon"},
+              {"key": "Service", "value": "backend"}
+            ]
+          # Resource configuration
+          cpu: "512"
+          memory: "1024"
+          # Network configuration
+          subnets: subnet-00b48d66e1d0e3e98, subnet-04cd9e3545d4d6d49
+          security-groups: sg-01e28f4c6641a99cf
+          # Service configuration
+          health-check-path: /health
+          # Auto scaling configuration
+          min-task-count: 1
+          max-task-count: 4
+          auto-scaling-metric: AVERAGE_CPU
+          auto-scaling-target-value: 70
+
+      # Get backend endpoint
+      - name: Print Backend Endpoint
+        run: |
+          echo "Backend successfully deployed!"
+          echo "Backend endpoint: ${{ steps.deploy-backend.outputs.endpoint }}"
+
+      # Deploy the frontend service using new ecs deploy express action
+      - name: Deploy Frontend Service
+        id: deploy-frontend
+        uses: aws-actions/amazon-ecs-deploy-express-service@v1
+        with:
+          # Required inputs
+          service-name: reel-canon-frontend-service
+          image: ${{ env.ECR_REGISTRY }}/reel-canon/frontend:${{ steps.get_tag.outputs.tag }}
+          execution-role-arn: ${{ secrets.ECS_EXECUTION_ROLE_ARN }}
+          infrastructure-role-arn: ${{ secrets.ECS_INFRASTRUCTURE_ROLE_ARN }}
+          # Service identification
+          cluster: reel-canon-cluster
+          # Container configuration
+          container-port: 80
+          tags: |
+            [
+              {"key": "Environment", "value": "production"},
+              {"key": "Application", "value": "reel-canon"},
+              {"key": "Service", "value": "frontend"}
+            ]
+          # Resource configuration
+          cpu: "512"
+          memory: "1024"
+          # Network configuration
+          subnets: subnet-00b48d66e1d0e3e98, subnet-04cd9e3545d4d6d49
+          security-groups: sg-050a6b8cc7b55051b
+          health-check-path: /
+          # Auto-scaling configuration
+          min-task-count: 1
+          max-task-count: 4
+          auto-scaling-metric: AVERAGE_CPU
+          auto-scaling-target-value: 70
+
+          # Get deployment summary
+      - name: Deployment Summary
+        run: |
+          echo "Deployment completed successfully!"
+          echo "Backend endpoint: ${{ steps.deploy-backend.outputs.endpoint }}"
+          echo "Frontend endpoint: ${{ steps.deploy-frontend.outputs.endpoint }}"

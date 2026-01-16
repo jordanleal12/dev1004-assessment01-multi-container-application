@@ -10,7 +10,7 @@ on:
     # Specify image tag to be deployed when manually triggering workflow
     inputs:
       tag:
-        description: "Provide image tag for manual deployment (e.g. 1.0.0-abc1234)"
+        description: "Provide image tag for manual deployment (e.g. 1.0.0-prod-abc1234)"
         required: true
 
 permissions:

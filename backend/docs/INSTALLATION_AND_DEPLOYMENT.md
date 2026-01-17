@@ -1,6 +1,6 @@
 # Installation and Deployment
 
-Below are the installation instructions to setup and deploy this API either locally or hosted via cloud. Refer to the [requirements section](/README.md#technology-stack) in the README for pre-requisites.
+Below are the installation instructions to setup and deploy this API either locally or hosted via cloud. Refer to the [requirements section](./README.md#technology-stack) in the README for pre-requisites.
 
 ## Contents
 

@@ -1,6 +1,6 @@
 # The Century Screening Room - Front-End App (React)
 
-![The Century Screening Room Logo](src/assets/images/logoreadme.png)
+![The Century Screening Room Logo](./src/assets/images/logoreadme.png)
 
 ## Table of Contents
 
@@ -111,7 +111,7 @@ To run this app, you need:
   - React has a built-in large ecosystem providing plenty of built-in packages including for features such as for routing and forms and is a widely used front-end library used for building user interface (UI) components, use hooks, manage state and virtual document-object model (DOM).
   - It also provides flexibility to integrate with other packages and is backed by strong community support.
   - On the [2024 survey ran by Devographics](https://2024.stateofjs.com/en-US/libraries/front-end-frameworks/), the responses reflect that it is the most used front-end framework, therefore making it considered a highly relevant industry skill for developers to learn for front-end development (2025, Devographics).
-    ![2024 survey ran by Devographics](src/assets/images/2024-devographics-frontend-survey.png)
+    ![2024 survey ran by Devographics](./src/assets/images/2024-devographics-frontend-survey.png)
 
 - **Purpose & Usage:**
   - React is a lightweight and the currently the main library

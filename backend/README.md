@@ -1,6 +1,6 @@
 # The Reel Canon Backend API
 
-![Image of Cinema with 'The Reel Canon' text overlay](/docs/images/theReelCanon.jpg)
+![Image of Cinema with 'The Reel Canon' text overlay](./docs/images/theReelCanon.jpg)
 
 ## Table of Contents
 
@@ -15,10 +15,10 @@
 
 ### Other Documents
 
-1. [Installation & Deployment](/docs/INSTALLATION_AND_DEPLOYMENT.md)
-2. [Technologies](/docs/TECHNOLOGIES.md)
-3. [Troubleshooting](/docs/TROUBLESHOOTING.md)
-4. [Usage](/docs/USAGE.md)
+1. [Installation & Deployment](./docs/INSTALLATION_AND_DEPLOYMENT.md)
+2. [Technologies](./docs/TECHNOLOGIES.md)
+3. [Troubleshooting](./docs/TROUBLESHOOTING.md)
+4. [Usage](./docs/USAGE.md)
 
 ---
 
@@ -125,7 +125,7 @@ _Figure 4: POST /auth/register: Token obscured for data security purposes_
 
 ---
 
-## 7. Database Deployment
+## 5. Database Deployment
 
 **Evidence of deployment of database to Mongo Atlas:**
 ![Reel Canon cluster in Mongo Atlas](./docs/images/MongoCluster.png)

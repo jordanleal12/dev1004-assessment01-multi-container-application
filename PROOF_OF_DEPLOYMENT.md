@@ -1,16 +1,22 @@
 # Proof Of Deployment and Automation
 
-## CI Tests Workflow
+## Github Automation
+
+### CI Tests Workflow
 
 ![successful CI Tests workflow run](./images/ci-tests.png)
 
-## Build and Push Workflow
+### Build and Push Workflow
 
 ![Successful Build and Push workflow run](./images/build-and-push.png)
 
-## Deploy Workflow
+### Deploy Workflow
 
 ![Successful Deploy Workflow Run](./images/deploy.png)
+
+### GitHub Secrets
+
+![GitHub Secrets](./images/github-secrets.png)
 
 ## AWS Configuration
 

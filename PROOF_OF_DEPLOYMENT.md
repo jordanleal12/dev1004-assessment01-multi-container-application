@@ -1,5 +1,7 @@
 # Proof Of Deployment and Automation
 
+The application is [deployed at this URL.](https://re-2b69362bbe8c493ea8c4cba2cfe431ff.ecs.ap-southeast-2.on.aws/) The tasks are currently stopped to reduce running costs, for assessment marking please contact me so I can start the tasks.
+
 ## Github Automation
 
 ### CI Tests Workflow
